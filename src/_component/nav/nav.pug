@@ -1,0 +1,7 @@
+nav.nav__bar
+  each navItem in data['nav-list']
+    a.nav__link(
+      href=navItem.href
+      title=navItem.title
+    )=navItem.label
+
