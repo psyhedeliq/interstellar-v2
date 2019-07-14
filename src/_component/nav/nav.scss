@@ -1,19 +1,72 @@
-.nav__bar {
+.nav__wrapper {
   background-color: #343a40;
+}
+
+.nav__bar {
+  width: 1140px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 820px repeat(4, 100px) 1fr;
+  position: relative;
+  grid-template-columns: 740px repeat(4, 100px);
+}
+
+.nav__current {
+  height: 5px;
+  width: 50px;
+  background-color: green;
+  position: absolute;
+  left: 25px;
+  bottom: 5px;
+  transition: 0.25s;
 }
 
 .nav__link {
   color: white;
   text-decoration: none;
   line-height: 56px;
+  height: 56px;
+  position: relative;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: attr(data-label);
+    position: absolute;
+    transition: 0.25s;
+    left: 0;
+    width: 100%;
+  }
+
+  &:hover::before {
+    top: -100%;
+  }
+
+  &:hover::after {
+    top: 0;
+  }
+
+  &::after {
+    color: yellow;
+    top: 100%;
+  }
+
+  &::before {
+    top: 0%;
+  }
 
   &:first-child {
-    grid-column-start: 2;
+    font-size: 1.25rem;
   }
 
   &:not(:first-child) {
+    font-size: 14px;
     text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+@for $i from 2 through 5 {
+  .nav__link:nth-child(#{$i}):hover ~ .nav__current {
+    left: ($i - 1) * 100px + 665px;
   }
 }
